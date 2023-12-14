@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Home Page
+{% endblock %}
+
+{% block main %}
+<div class="container mt-5">
+    {% if success %}
+        <h1 class="display-4">Your order was placed successfully</h1>
+        <p class="lead">It should be ready for pickup in {{ range }} minutes</p>
+    {% else %}
+        <h1 class="display-4">Your order failed</h1>
+        <p class="lead">This is likely due to a cancellation. If you didn't cancel it, please try to make a new order.</p>
+    {% endif %}
+        <a href="/" class="btn btn-primary mt-3">Return to home</a>
+</div>
+{% endblock %}

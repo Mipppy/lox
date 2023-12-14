@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Menu
+{% endblock %}
+
+{% block main %}
+    <input type="text" id="searchInput" class="form-control mb-4" placeholder="Search products">
+    {% for index in products %}    
+    <div class="load rounded hovertext position-relative overflow-hidden" style="cursor: pointer;width: 400px; height: 400px; max-width: 400px; max-height: 400px; background-image: url('{{ index.image }}'); display: inline-block; background-color: lightgray;  background-size: 400px; background-position-y: 60px; background-repeat: no-repeat; ">
+        <div class="container mt-4 position-relative">
+            <div class="title text-center">
+                <h2 class="text-primary">{{ index.name }}</h2>
+                <a href="/products/{{ index.shortname }}" class="btn btn-success btn-lg">Order now</a>
+                <div class="hover d-flex align-items-end">
+                    <h5>{{ index.description }}</h5>
+                    <br><br><br>
+                    <h4 class="font-weight-bold">{{ index.price | usd }}</h4>
+                </div>
+            </div>
+        </div>
+    </div>    
+    {% endfor %}
+    <script>
+    document.getElementById('searchInput').addEventListener('input', function () {
+        const searchValue = this.value.toLowerCase();
+        const products = document.querySelectorAll('.load');
+
+        products.forEach(function (product) {
+            const productName = product.querySelector('.text-primary').innerText.toLowerCase();
+            const shouldShow = productName.includes(searchValue);
+
+            product.style.display = shouldShow ? 'inline-block' : 'none';
+        });
+    });
+    </script>
+{% endblock %}

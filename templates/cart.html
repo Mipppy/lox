@@ -1,0 +1,50 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Cart
+{% endblock %}
+
+{% block main %}
+{% if cart|length > 0%}
+<form method="post">
+    <button type="submit" name="checkout" class="btn btn-primary">Check out</button>
+</form>
+{% endif%}
+<h4>Total with fees: <b>{{fees_total_price | usd}}</b></h4>
+<h5>Total without fees: <b>{{total_price | usd}}</b></h5>
+<table class="table table-striped mt-3">
+    <thead>
+        <tr>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Unit Price</th>
+            <th>Total Price</th>
+            <th>Modifiers</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for product in cart %}
+        <tr>
+            <th>{{product.product}}</th>
+            <th>{{product.quanity}}</th>
+            <th>{{product.price | usd}}</th>
+            <th>{{(product.price * product.quanity) | usd}}</th>
+            <th>{{product.modifiers}}</th>
+            <th>
+                <form method="post" title="Remove from cart" action="/removefromcart" onsubmit="lock_input(document.getElementById('{{product.id}}'))">
+                    <input type="hidden" name="product" value="{{ product }}">
+                    <input type="hidden" name="productid" value="{{ product.id }}">
+                    <button type="submit" class="btn btn-danger pt-1 pl-3 pr-3" id="{{ product.id}}" class="submitbtn">
+                        <span style="font-size: 1em;">&times;</span>
+                    </button>
+                </form>                             
+            </th>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% if cart|length == 0 %}
+  <h1>Nothing in the cart yet!  Browse the menu to find products</h1>
+  <a href="/menu"><button class="btn btn-primary pt-1 pl-3 pr-3">Menu</button></a>
+{% endif %}
+{% endblock %}

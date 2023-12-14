@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Admin Home
+{% endblock %}
+
+{% block main %}
+<div class="container-fluid">
+    <div class="row content">
+      <div class="col-sm-3 sidenav">
+        <h4>Admin Page</h4>
+        <ul class="nav nav-pills nav-stacked">
+          <li class="active"><a href="/admin"><button class="btn btn-primary ml-5">Home</button></a></li>
+          <li><form action="/adminorders" method="post" ><button type="submit" class="btn btn-primary ml-5">Orders</button></form></li>
+          <li><form action="/adminusers" method="post"><button type="submit" class="btn btn-primary ml-5">User</button></form></li>
+          <li><form action="/adminsitedata" method="post"><button type="submit" class="btn btn-primary ml-5">Site data</button></form></li>
+        </ul><br>
+      </div>
+  
+      <div class="col-sm-9">
+        <h4><small>Active Orders</small></h4>
+        <hr>
+        <table  class="table table-striped mt-3">
+          <thead>
+            <tr>
+              <th><b>Order id</b></th>
+              <th><b>User</b></th>
+              <th><b>Price paid</b></th>
+              <th><b>Time paid</b></th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for order in active_orders%}
+              <tr>
+              <th><a href="/orders/{{order.orderid}}">{{ order.orderid}}</a></th>
+              <th>{{order.user[0]['username']}}</th>
+                <th>{{order.total}}</th>
+              <th>{{order.date}}</th>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+{% endblock %}

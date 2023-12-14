@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Order: {{order_id}}
+{% endblock %}
+
+{% block main %}
+<h1>Order: {{order_id}}</h1>
+<h5>Date: {{order_info[0].date}}</h5>
+<h4>Was picked up: <b>{{completed}}</b></h4>
+<form method="post">
+    <input hidden value="{{order_info}}" name="order_info">
+    <button type="submit" class="btn btn-primary pt-1 pl-3 pr-3" title="Adds order into cart">Add to cart</button>
+</form>
+<table class="table table-striped mt-3">
+    <thead>
+        <tr>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Unit Price</th>
+            <th>Total Price</th>
+            <th>Modifiers</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for product in order_info %}
+        <tr>
+            <th>{{product.product}}</th>
+            <th>{{product.quantity}}</th>
+            <th>{{product.total | usd}}</th>
+            <th>{{(product.total * product.quantity) | usd}}</th>
+            <th>{{product.modifiers}}</th>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

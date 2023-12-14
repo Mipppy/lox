@@ -1,0 +1,33 @@
+
+
+  {% extends "layout.html" %}
+
+{% block title %}
+    Admin Home
+{% endblock %}
+
+{% block main %}
+<div class="container-fluid">
+    <div class="row content">
+      <div class="col-sm-3 sidenav">
+        <h4>Admin Page</h4>
+        <ul class="nav nav-pills nav-stacked">
+          <li class="active"><a href="/admin">Home</a></li>
+          <li><form action="/adminorders" ><button type="submit">Orders</button></form></li>
+          <li><form action="/adminusers" ><button type="submit">User</button></form></li>
+          <li><form action="superuser/admin_site_data"><button type="submit">Site data</button></form></li>
+        </ul><br>
+      </div>
+  
+      <div class="col-sm-9">
+        <h4><small>Site Data</small></h4>
+        <hr>
+        <h1>All time visitors: {{site_data.site_views}}</h1>
+        <h1>Total sales: {{site_data.total_sales}}</h1>
+        <h1>Accounts: {{site_data.accounts_created}}</h1>
+        <h1>Sign Ins: {{site_data.sign_ins}}</h1>
+        <h1>Orders placed: {{site_data.orders_placed}}</h1>
+      </div>
+    </div>
+  </div>
+{% endblock %}

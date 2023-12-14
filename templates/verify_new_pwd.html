@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Verify New Password
+{% endblock %}
+
+{% block main %}
+    <h3>Verify your new password</h3>
+    <p>Check your email at <b>{{ email }}</b></p>
+    <form action="/verify_new" method="post">
+        <div class="mb-3">
+            <input class="form-control mx-auto w-auto" autocomplete="off" name="code" placeholder="Verification Code" type="text">
+        </div>
+        <button class="btn btn-primary" type="submit">Verify</button>
+    </form>
+{% endblock %}

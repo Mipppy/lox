@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Home Page
+{% endblock %}
+
+{% block main %}
+      <table class="table striped">
+        <thead>
+          <th>Order Number</th>
+          <th>Date</th>
+          <th>Picked up</th>
+        </thead>
+        <tbody>
+          {% for product in orders%}
+            <tr>
+              <th> <a href="/orders/{{product.orderid}}">{{product.orderid}}<a></a></th>
+              <th> {{product.date}}</th>
+              <th>{{completed}}</th>
+              <th> 
+                <form method="post" onsubmit="lock_input(document.getElementById('{{product.orderid}}'))">
+                  <input type="text" hidden value="{{ product.orderid }}" name="product">
+                  <button type="submit" class="btn btn-primary pt-1 pl-3 pr-3" title="Adds order into cart" id="{{product.orderid}}">Add to cart</button>
+                </form>
+              </th>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+{% endblock %}

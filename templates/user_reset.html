@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Forgot Username 
+{% endblock %}
+
+{% block main %}
+<form action="/user_reset" method="post">
+    <div class="mb-3">
+        <input autocomplete="off" class="form-control mx-auto w-auto" id="username" name="email" placeholder="Email" type="text">
+    </div>
+    <div class="mb-3">
+        <input class="form-control mx-auto w-auto" id="password" name="password" placeholder="Password" type="password">
+    </div>
+    <button class="btn btn-primary" type="submit">Send Email</button>
+</form>
+{% endblock %}

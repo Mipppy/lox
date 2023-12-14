@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Verify Email Address
+{% endblock %}
+
+{% block main %}
+    <form action="/verify" method="post">
+        <div class="mb-3">
+            <input class="form-control mx-auto w-auto" autocomplete="off" name="code" placeholder="Verification Code" type="text">
+        </div>
+        <button class="btn btn-primary" type="submit">Verify</button>
+    </form>
+{% endblock %}

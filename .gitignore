@@ -1,0 +1,5 @@
+.venv
+.env
+venv
+flask_session
+__pychache__
